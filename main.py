@@ -1,7 +1,6 @@
 # ---------- importing the important libraries --------------- #
 import discord
 import asyncio
-from os import getenv
 from os import environ
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
   # ------------------------------------------------------------ #
