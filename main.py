@@ -8,7 +8,6 @@ from discord.ext import commands  # for using commands.Bot() instead of discord.
 
   # ------------------ connection and stuff -------------------- #
 TOKEN = environ.get('TOKEN')  # Get TOKEN
-ID = int(environ.get('ID'))
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discord (through the command section module)
