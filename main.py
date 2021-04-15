@@ -14,6 +14,7 @@ bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discor
 
 initial_extensions = (
 	'cogs.hello',
+	'cogs.poll'
 )
 
 for extension in initial_extensions:
