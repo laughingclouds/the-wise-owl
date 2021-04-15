@@ -16,7 +16,7 @@ class interacting(commands.Cog):
     async def on_member_join(self, member):
         channel = member.guild.system_channel
         if channel is not None:
-            await channel.send(on_member_join_msg)
+            await channel.send(self.on_member_join_msg)
         else:
             pass # send msg to admins to create a sys chan
     
@@ -24,7 +24,7 @@ class interacting(commands.Cog):
     async def on_member_remove(self, member):
         channel = member.guild.system_channel
         if channel is not None:
-                await channel.send(on_member_remove_msg)
+                await channel.send(self.on_member_remove_msg)
         else:
             pass # send msg to admins to create a sys chan
 
