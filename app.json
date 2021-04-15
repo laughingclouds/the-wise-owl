@@ -2,9 +2,9 @@
   "name": "the-wise-owl",
   "description": "A barebones Python app, which can easily be deployed to Heroku.",
   "image": "heroku/python",
-  "repository": "https://github.com/heroku/python-getting-started",
+  "repository": "https://git.heroku.com/the-wise-owl.git",
   "keywords": ["python", "django" ],
-  "addons": [ "heroku-postgresql" ],
+  "addons": null,
   "env": {
     "SECRET_KEY": {
       "description": "The secret key for the Django application.",
