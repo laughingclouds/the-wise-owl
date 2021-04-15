@@ -3,6 +3,7 @@ import discord
 import asyncio
 from os import environ
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
+from discord.ext.commands.Bot import load_extension
   # ------------------------------------------------------------ #
 
   # ------------------ connection and stuff -------------------- #
@@ -11,6 +12,7 @@ intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discord (through the command section module)
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
+bot.load_extension('cogs.hello')
 
 @bot.event
 async def on_ready():
