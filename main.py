@@ -3,7 +3,6 @@ import discord
 import asyncio
 from os import getenv
 from os import environ
-from dotenv import load_dotenv
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
   # ------------------------------------------------------------ #
 
