@@ -2,14 +2,14 @@
 import discord
 import asyncio
 from os import getenv
+from os import environ
 from dotenv import load_dotenv
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
   # ------------------------------------------------------------ #
 
   # ------------------ connection and stuff -------------------- #
-load_dotenv()  # For parsing the .env file
-TOKEN = getenv('TOKEN')  # Get TOKEN
-ID = int(getenv('ID'))
+TOKEN = environ.get('TOKEN')  # Get TOKEN
+ID = int(environ.get('ID'))
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discord (through the command section module)
