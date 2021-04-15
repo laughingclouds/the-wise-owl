@@ -7,11 +7,17 @@ from discord.ext import commands  # for using commands.Bot() instead of discord.
 
   # ------------------ connection and stuff -------------------- #
 TOKEN = environ.get('TOKEN')  # Get TOKEN
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.members = True
 bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discord (through the command section module)
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
-bot.load_extension('cogs.hello')
+
+initial_extensions = (
+	'cogs.hello',
+)
+
+for extension in initial_extensions:
+	bot.load_extension(extension)
 
 @bot.event
 async def on_ready():
