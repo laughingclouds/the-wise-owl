@@ -3,7 +3,6 @@ import discord
 import asyncio
 from os import environ
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
-from discord.ext.commands.Bot import load_extension
   # ------------------------------------------------------------ #
 
   # ------------------ connection and stuff -------------------- #
