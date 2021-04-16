@@ -28,7 +28,7 @@ class CommandErrorHandler(commands.Cog):
             embed.set_author(name = 'Error lol')
             embed.add_field(name = '\'on_error\'', value = 'https://discordpy.readthedocs.io/en/latest/api.html#discord.on_error', inline = False)
             embed.add_field(name = '', value = 'This is an error for the local handlers to deal with...hopefully not me.', inline = False)
-            await ctx.send(embed = embed)            
+            await ctx.send(embed=embed)            
             return
 
         # This prevents any cogs with an overwritten cog_command_error being hanled here.
@@ -65,12 +65,17 @@ class CommandErrorHandler(commands.Cog):
         
         else:
             # All other errors not returned come here. And we can just print the default Traceback.
-            msg = f"""There was an error, and cuz\' my creator is too lazy he didn\'t add much error handling.
-            Anyways, this is the error: {type(error)}, {error}, {error.__traceback__}"""
+            msg = "There was an error, and cuz\' my creator is too lazy he didn\'t add much error handling.\nAnyways, here is the error msg:\n"
+            
+            embed = discord.Embed(colour = discord.Colour.red())
+            embed.set_author(name='Error lol')
+            embed.add_field(name='A msg for you:', value=msg, inline=False)
+            embed.add_field(name=f"{type(error)}", value=f"{error}", inline=False)
+            embed.add_field(name="Traceback", value=f"{error.__traceback__}", inline=False)
             try:
-                await ctx.send(msg)
+                await ctx.send(embed=embed)
             except:
-                await ctx.send("Error lol, could u pls contact my developer?")
+                await ctx.send("Error lol, could u pls contact my developer at \nhttps://discord.gg/Gu4mVGhwWJ  ?")
 
         
 

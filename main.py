@@ -46,24 +46,24 @@ async def info(ctx):
 	embed.set_author(name = 'Info')
 	embed.add_field(name = 'What is it?', value = 'A discord bot made using python for helping you keep track of your goals', inline = False)
 	embed.add_field(name = 'Creator', value = 'Made by \'Hemant\'', inline = False)
-	embed.add_field(name = 'Source code', value = 'I\'m not sharing =_=\nYou can join the server tho:\nhttps://discord.gg/bkhkSrwvW4', inline = False)
+	embed.add_field(name = 'Source code', value = 'I\'m not sharing =_=\nYou can join the server tho:\nhttps://discord.gg/Gu4mVGhwWJ', inline = False)
 	await ctx.send(embed = embed)
 
 
 @bot.command()
-async def all(ctx):	
+async def all(ctx):
+	"""Shows all the commands"""
 	embed = discord.Embed(colour = discord.Colour.red())
-	embed.set_author(name = 'All commands of The-goal-setting-bot')
-	embed.add_field(name='help', value=help.__doc__, inline=False)
-	embed.add_field(name='info', value=info.__doc__, inline=False)
-	await ctx.send(embed = embed)
-	embed.add_field(name='poll', value=poll.__doc__, inline=False)
-	embed.add_field(name='quickpoll', value=quickpoll.__doc__, inline=False)
-	embed.add_field(name='repeat', value=do_repeat.__doc__, inline=False)
-	embed.add_field(name='hello', value=hello.__doc__, inline=False)
+	embed.set_author(name = 'All commands of The Wise Owl')
+
+	command_list = bot.commands()
+
+	# Adding all the commands of the bot into the embed obj
+	for bot_command in command_list:
+		embed.add_field(name=f'{bot_command}', value=f"{bot.command_prefix}{bot_command}", inline=False)		
 	embed.add_field(name = 'End', value = 'We\'ll be coming with new features soon', inline = False)
+
 	await ctx.send(embed = embed)
 
-  # --------------- the main commands -------------------------- #
 
 bot.run(TOKEN)
