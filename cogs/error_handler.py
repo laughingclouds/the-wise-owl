@@ -72,19 +72,6 @@ class CommandErrorHandler(commands.Cog):
             except:
                 await ctx.send("Error lol, could u pls contact my developer?")
 
-        # local error handler for the command "do_repeat"
-        @do_repeat.error
-        async def do_repeat_handler(self, ctx, error):
-            """A local Error Handler for our command do_repeat.
-            
-            This will only listen for errors in do_repeat.
-            The global on_command_error will still be invoked after.
-            """
-
-            # Check if our required argument inp is missing.
-            if isinstance(error, commands.MissingRequiredArgument):
-                if error.param.name == 'inp':
-                    await ctx.send(f"You forgot to give the input.")
         
 
 def setup(bot):
