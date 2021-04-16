@@ -36,7 +36,7 @@ class interacting(commands.Cog):
         await ctx.send(inp)
 
     
-    commands.command(name="hello", aliases=['hi', 'howdy'])
+    @commands.command(name="hello", aliases=['hi', 'howdy'])
     async def hello(self, ctx):
         """Command to send yourself a hello...it\'s quite obv y\'know!"""
         await ctx.send(f"Hello {ctx.author.display_name}")
