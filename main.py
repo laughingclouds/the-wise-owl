@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discor
 
 cog_extensions = (
 	'cogs.poll',
-	'cogs.hello',
+	'cogs.interacting',
 	'cogs.error_handler'
 )
 
