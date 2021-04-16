@@ -1,12 +1,11 @@
 # ---------- importing the important libraries --------------- #
+import os
 import discord
-import asyncio
-from os import environ
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
   # ------------------------------------------------------------ #
 
   # ------------------ connection and stuff -------------------- #
-TOKEN = environ.get('TOKEN')  # Get TOKEN
+TOKEN = os.environ['TOKEN']	# Get TOKEN
 intents = discord.Intents.all()
 intents.members = True
 bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discord (through the command section module)
