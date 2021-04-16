@@ -1,7 +1,7 @@
 from discord.ext import commands
 
 
-class interactions(commands.Cog):
+class Interactions(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.on_member_join_msg = "G'day! If you leave I'll kill you"
@@ -57,4 +57,4 @@ class interactions(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(interactions(bot))
+    bot.add_cog(Interactions(bot))

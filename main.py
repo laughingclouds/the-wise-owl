@@ -27,36 +27,24 @@ async def on_ready():
 	await bot.change_presence(activity=discord.Game("gghelp"))  # will display as "playing !help"
   # ------------------------------------------------------------ #
 
-bot.remove_command('help')
-
-@bot.command()
-async def help(ctx):
-	"""Shows the help command...lol"""
-	embed = discord.Embed(colour = discord.Colour.green())
-	embed.set_author(name = 'Help: \nShows this message')
-	embed.add_field(name = 'info', value = 'Gives info on the bot', inline = False)
-	embed.add_field(name = 'all', value = 'List of all available commands', inline = False)
-	await ctx.send(embed = embed)
-
-
 @bot.command()	
 async def info(ctx):
 	"""Gives information on the bot"""
 	embed = discord.Embed(colour = discord.Colour.purple())
-	embed.set_author(name = 'Info')
-	embed.add_field(name = 'What is it?', value = 'A discord bot made using python for helping you keep track of your goals', inline = False)
-	embed.add_field(name = 'Creator', value = 'Made by \'Hemant\'', inline = False)
-	embed.add_field(name = 'Source code', value = 'I\'m not sharing =_=\nYou can join the server tho:\nhttps://discord.gg/Gu4mVGhwWJ', inline = False)
+	embed.set_author(name = "Info")
+	embed.add_field(name = "What is it?", value = "A discord bot made using python for helping you keep track of your goals", inline = False)
+	embed.add_field(name = "Creator", value = "Made by \'Hemant\' aka \'LaughingOutClouds\'", inline = False)
+	embed.add_field(name = "Source code", value = "I\'m not sharing =_=\nYou can join the server tho:\nhttps://discord.gg/Gu4mVGhwWJ", inline = False)
 	await ctx.send(embed = embed)
 
 
 @bot.command()
 async def all(ctx):
-	"""Shows all the commands"""
+	"""Shows list of all available commands"""
 	embed = discord.Embed(colour = discord.Colour.red())
-	embed.set_author(name = 'All commands of The Wise Owl')
+	embed.set_author(name = "All commands of The Wise Owl\ngghelp <command_name> for more info on particular commands.")
 
-	command_list = bot.commands()
+	command_list = bot.commands
 
 	# Adding all the commands of the bot into the embed obj
 	for bot_command in command_list:
