@@ -24,7 +24,7 @@ class Interactions(commands.Cog):
             pass # send msg to admins to create a sys chan
     
 
-    @commands.command(name="repeat", aliases=['mimic', 'copy'])
+    @commands.command(name="say", aliases=['mimic', 'repeat', 'copy'])
     async def do_repeat(self, ctx, *, inp: str):
         """A simple command that repeats your input
 
@@ -33,6 +33,8 @@ class Interactions(commands.Cog):
         inp: str
             The input you wish to repeat.
         """
+        msg = [ctx.message]  # msg to delete
+        await ctx.channel.delete_messages(msg)
         await ctx.send(inp)
     
     # local error handler for the command "do_repeat"
