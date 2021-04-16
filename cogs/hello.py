@@ -1,11 +1,6 @@
 from discord.ext import commands
 
 
-@commands.command()
-async def hello(ctx):
-    await ctx.send(f"Hello {ctx.author.display_name}.")
-
-
 class interacting(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -27,8 +22,24 @@ class interacting(commands.Cog):
                 await channel.send(self.on_member_remove_msg)
         else:
             pass # send msg to admins to create a sys chan
+    
+
+    @commands.command(name="repeat", aliases=['mimic', 'copy'])
+    async def do_repeat(self, ctx, *, inp: str):
+        """A simple command that repeats your input
+
+        Parameters-
+
+        inp: str
+            The input you wish to repeat.
+        """
+        await ctx.send(inp)
+
+    
+    commands.command(name="hello", aliases=['hi', 'howdy'])
+    async def hello(self, ctx):
+        await ctx.send(f"Hello {ctx.author.display_name}")
 
 
 def setup(bot):
-    bot.add_command(hello)
     bot.add_cog(interacting(bot))

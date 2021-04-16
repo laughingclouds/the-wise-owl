@@ -44,7 +44,7 @@ class Polls(commands.Cog):
         try:
             await ctx.channel.delete_messages(messages)
         except:
-            pass # oh well
+            pass  # exception handling at its best
 
         answer = '\n'.join(f'{keycap}: {content}' for keycap, content in answers)
         actual_poll = await ctx.send(f'{ctx.author} asks: {question}\n\n{answer}')
