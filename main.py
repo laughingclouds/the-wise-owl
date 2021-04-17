@@ -1,10 +1,8 @@
-# ---------- importing the important libraries --------------- #
 import os
 import discord
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
-# ------------------------------------------------------------ #
 
-  # ------------------ connection and stuff -------------------- #
+
 TOKEN = os.environ['TOKEN']	# Get TOKEN
 intents = discord.Intents.all()
 intents.members = True
@@ -34,9 +32,9 @@ async def info(ctx):
     embed = discord.Embed(colour=discord.Colour.purple())
     embed.set_author(name="Info")
     embed.add_field(name="What is it?", value="A discord bot made using python for helping you keep track of your goals", inline=False)
-    embed.add_field(name="Creator", value="Made by \'Hemant\' aka \'LaughingOutClouds\'", inline=False)
+    embed.add_field(name="Creator", value="Made by \'LaughingOutClouds\'", inline=False)
     embed.add_field(name="Source code", value="I\'m not sharing =_=\nYou can join the server tho:\nhttps://discord.gg/Gu4mVGhwWJ", inline=False)
     await ctx.send(embed=embed)
-    
+
 
 bot.run(TOKEN)
