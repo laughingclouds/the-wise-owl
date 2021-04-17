@@ -15,6 +15,7 @@ bot = commands.Bot(
 
 cog_extensions = (
 	'cogs.poll',
+    'cogs.owner'
 	'cogs.interacting',
 	'cogs.error_handler'
 )
