@@ -21,7 +21,7 @@ class OwnerCog(commands.Cog):
         except Exception as e:
             await ctx.send(f"**`ERORR:`** {type(e).__name__} - {e}")
         else:
-            await ctx.send(f"{cog} loaded successfully")
+            await ctx.send('\N{OK HAND SIGN}')
 
 
     @commands.command(name='unload', hidden=True)
@@ -35,7 +35,7 @@ class OwnerCog(commands.Cog):
         except Exception as e:
             await ctx.send(f"**`ERROR:`** {type(e).__name__} - {e}")
         else:
-            await ctx.send(f"{cog} unloaded successfully")
+            await ctx.send('\N{OK HAND SIGN}')
     
 
     @commands.command(name='reload', hidden=True)
@@ -49,7 +49,7 @@ class OwnerCog(commands.Cog):
         except Exception as e:
             await ctx.send(f"**`ERROR:`** {type(e).__name__} - {e}")
         else:
-            await ctx.send(f"{cog} reloaded successfully")
+            await ctx.send('\N{OK HAND SIGN}')
 
 
 def setup(bot):
