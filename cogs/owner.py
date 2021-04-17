@@ -50,3 +50,7 @@ class OwnerCog(commands.Cog):
             await ctx.send(f"**`ERROR:`** {type(e).__name__} - {e}")
         else:
             await ctx.send(f"{cog} reloaded successfully")
+
+
+def setup(bot):
+    bot.add_cog(OwnerCog(bot))
