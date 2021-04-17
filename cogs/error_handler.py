@@ -53,7 +53,7 @@ class CommandErrorHandler(commands.Cog):
         
         elif isinstance(error, commands.NoPrivateMessage):
             try:
-                await ctx.author.send(f"P{ctx.command} can\'t be used in the DMs.")
+                await ctx.author.send(f"{ctx.command} can\'t be used in the DMs.")
             except discord.HTTPException:
                 pass
         
@@ -70,8 +70,7 @@ class CommandErrorHandler(commands.Cog):
             embed = discord.Embed(colour = discord.Colour.red())
             embed.set_author(name='Error lol')
             embed.add_field(name='A msg for you:', value=msg, inline=False)
-            embed.add_field(name=f"{type(error)}", value=f"{error}", inline=False)
-            embed.add_field(name="Traceback", value=f"{error.__traceback__}", inline=False)
+            embed.add_field(name=f"{type(error).__name__}", value=f"{error}", inline=False)
             try:
                 await ctx.send(embed=embed)
             except:
