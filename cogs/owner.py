@@ -2,6 +2,7 @@ from discord.ext import commands
 
 
 class OwnerCog(commands.Cog):
+    """Commands that can be run by an owner only"""
 
     def __init__(self, bot):
         self.bot = bot
