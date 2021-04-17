@@ -12,8 +12,8 @@ bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discor
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
 
 cog_extensions = (
+    'cogs.poll',
     'cogs.owner',
-    'cogs.testing',
 	'cogs.interacting',
 	'cogs.error_handler'
 )
@@ -37,22 +37,6 @@ async def info(ctx):
     embed.add_field(name="Creator", value="Made by \'Hemant\' aka \'LaughingOutClouds\'", inline=False)
     embed.add_field(name="Source code", value="I\'m not sharing =_=\nYou can join the server tho:\nhttps://discord.gg/Gu4mVGhwWJ", inline=False)
     await ctx.send(embed=embed)
-
-
-@bot.command()
-async def all(ctx):
-    """Shows list of all available commands"""
-    embed = discord.Embed(colour=discord.Colour.red())
-    embed.set_author(name="All commands of The Wise Owl\ngghelp <command_name> for more info on particular commands.")
-
-    command_list = bot.commands
-
-    # Adding all the commands of the bot into the embed obj
-    for bot_command in command_list:
-        embed.add_field(name=f'{bot_command}', value=f"{bot.command_prefix}{bot_command}", inline=False)
-    embed.add_field(name='End', value='We\'ll be coming with new features soon', inline=False)
-
-    await ctx.send(embed=embed)
-
+    
 
 bot.run(TOKEN)

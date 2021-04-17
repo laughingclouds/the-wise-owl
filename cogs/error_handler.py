@@ -65,14 +65,8 @@ class CommandErrorHandler(commands.Cog):
         
         else:
             # All other errors not returned come here. And we can just print the default Traceback.
-            msg = "There was an error, and cuz\' my creator is too lazy he didn\'t add much error handling.\nAnyways, here is the error msg:\n"
-            
-            embed = discord.Embed(colour = discord.Colour.red())
-            embed.set_author(name='Error lol')
-            embed.add_field(name='A msg for you:', value=msg, inline=False)
-            embed.add_field(name=f"{type(error).__name__}", value=f"{error}", inline=False)
             try:
-                await ctx.send(embed=embed)
+                await ctx.send(f"**`ERROR:`** {type(error).__name__} - {error}")
             except:
                 await ctx.send("Error lol, could u pls contact my developer at \nhttps://discord.gg/Gu4mVGhwWJ  ?")
 
