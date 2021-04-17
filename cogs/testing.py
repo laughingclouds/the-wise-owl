@@ -1,11 +1,6 @@
 from discord.ext import commands
 
 
-def to_emoji(c):
-    base = 0x1f1e6
-    return chr(base + c)
-
-
 class Misc(commands.Cog):
     """For testing new bot commands without actually re-running the bot"""
 
