@@ -6,10 +6,11 @@ from discord.ext import commands  # for using commands.Bot() instead of discord.
 TOKEN = os.environ['TOKEN']	# Get TOKEN
 intents = discord.Intents.all()
 intents.members = True
-bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discord (through the command section module)
+bot = commands.Bot(command_prefix='hg', intents=intents)  # connection to discord (through the command section module)
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
 
 cog_extensions = (
+    'cogs.mod',
     'cogs.poll',
     'cogs.owner',
 	'cogs.interacting',
@@ -23,7 +24,7 @@ for extension in cog_extensions:
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}\n{bot.user.id}\n------")  # bot.user is the 'bot'
-    await bot.change_presence(activity=discord.Game("gghelp"))  # will display as "playing !help"
+    await bot.change_presence(activity=discord.Game(f"{bot.command_prefix}help"))  # will display as "playing !help"
 
 
 @bot.command()

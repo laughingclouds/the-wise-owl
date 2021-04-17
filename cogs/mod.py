@@ -7,8 +7,12 @@ from discord.ext import commands
 
 class Mod(commands.Cog):
 
+    # Special methods
     def __init__(self, bot):
         self.bot = bot
+    
+    def __repr__(self):
+        return '<cogs.Mod>'
 
     # Miscellanious
     async def _basic_cleanup_strategy(self, ctx, search):
@@ -21,12 +25,12 @@ class Mod(commands.Cog):
     
 
     async def _complex_cleanup_strategy(self, ctx, search):
-        prefixes = tuple(self.bot.get_guild_prefixes(ctx.guild))
+        prefixes = tuple(await self.bot.get_prefix(ctx.guild))
 
         def check(m):
             return m.author == ctx.me or m.content.startswith(prefixes)
         
-        deleted = await ctx.channel.purge(limit=search, check, before=ctx.message)
+        deleted = await ctx.channel.purge(limit=search, check=check, before=ctx.message)
         return Counter(m.author.display_name for m in deleted)
 
 
@@ -58,7 +62,7 @@ class Mod(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(manage_messages=True)
-    async def clear(self, ctx, search=100):
+    async def cleanup(self, ctx, search=100):
         """Cleans up the bot's messages from the channel.
         If a search number is specified, it searches that many messages to delete.
         If the bot has Manage Messages permissions then it will try to delete
@@ -77,10 +81,15 @@ class Mod(commands.Cog):
         
         spammers = await strategy(ctx, search)  # spammers is a dictionary
         deleted = sum(spammers.values())
-        messages = [f"{deleted} message{" was" if deleted == 1 else "s were"} removed."]
+        add_str = " was" if deleted == 1 else "s were"
+        messages = [f"{deleted} message{add_str} removed."]
         if deleted:
-            message.append('')
+            messages.append('')
             spammers = sorted(spammers.items(), key=lambda t: t[1], reverse=True)
             messages.extend(f"- **{author}:** {count}" for author, count in spammers)
         
         await ctx.send('\n'.join(messages), delete_after=5)
+
+
+def setup(bot):
+    bot.add_cog(Mod(bot))

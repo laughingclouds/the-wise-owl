@@ -10,7 +10,7 @@ from discord.ext import commands
 
 async def check_permissions(ctx, perms, *, check=all):
     is_owner = await ctx.bot.is_owner(ctx.author)
-    if is is_owner:
+    if is_owner:
         return True
 
     resolved = ctx.channel.permissions_for(ctx.author)
