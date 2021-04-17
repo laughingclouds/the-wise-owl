@@ -11,7 +11,7 @@ class OwnerCog(commands.Cog):
     # is_owner means only the bot owner (or a team which owns the bot) will be able to use this command
     @commands.command(name='load', hidden=True)
     @commands.is_owner()
-    async def cog_load(self, ctx, *, cog: str):
+    async def load(self, ctx, *, cog: str):
         """Command to load a module.
         Use the dot path in this one.
         e.g: cogs.owner"""
@@ -26,7 +26,7 @@ class OwnerCog(commands.Cog):
 
     @commands.command(name='unload', hidden=True)
     @commands.is_owner()
-    async def cog_unload(self, ctx, *, cog: str):
+    async def unload(self, ctx, *, cog: str):
         """Command to unload a module.
         Use the dot path."""
 
@@ -40,7 +40,7 @@ class OwnerCog(commands.Cog):
 
     @commands.command(name='reload', hidden=True)
     @commands.is_owner()
-    async def cog_reload(self, ctx, *, cog: str):
+    async def reload(self, ctx, *, cog: str):
         """Command to reload a module.
         Use the dot path."""
 
