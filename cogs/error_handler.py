@@ -60,7 +60,7 @@ class CommandErrorHandler(commands.Cog):
         # check to see where it came from
 
         elif isinstance(error, commands.BadArgument):
-            if ctx.command.qualified_name == ("poll", "quickpoll"):  # Check if the command being invoked is 'tag list'
+            if ctx.command.qualified_name in ("poll", "quickpoll"):  # Check if the command being invoked is 'tag list'
                 await ctx.send('Hey kiddo, how dumb do you need to be to enter the arguements wrong?')
         
         else:
