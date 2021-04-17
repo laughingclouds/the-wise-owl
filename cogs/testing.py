@@ -2,6 +2,11 @@ import discord
 from discord.ext import commands
 
 
+def to_emoji(c):
+    base = 0x1f1e6
+    return chr(base + c)
+
+
 class Misc(commands.Cog):
     """For testing new bot commands without actually re-running the bot"""
 
@@ -15,7 +20,7 @@ class Misc(commands.Cog):
         embed = discord.Embed(colour=discord.Colour.red())
         embed.set_author(name="All commands of The Wise Owl\ngghelp <command_name> for more info on particular commands.")
 
-        command_list = self.commands
+        command_list = self.bot.commands
 
         # Adding all the commands of the bot into the embed obj
         for bot_command in command_list:
@@ -25,9 +30,11 @@ class Misc(commands.Cog):
         await ctx.send(embed=embed)
 
 
+    """Poll voting system."""
+
     @commands.command()
     @commands.guild_only()
-    async def spoll(self, ctx, *, question):
+    async def poll(self, ctx, *, question):
         """Interactively creates a poll with the following question.
 
         To vote, use reactions!
@@ -65,10 +72,40 @@ class Misc(commands.Cog):
         for emoji, _ in answers:
             await actual_poll.add_reaction(emoji)
 
-    @spoll.error
+    @poll.error
     async def poll_error(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
             return await ctx.send('Missing the question.')
+
+    @commands.command()
+    @commands.guild_only()
+    async def quickpoll(self, ctx, *questions_and_choices: str):
+        """Makes a poll quickly.
+
+        The first argument is the question and the rest are the choices.
+        """
+
+        if len(questions_and_choices) < 3:
+            return await ctx.send('Need at least 1 question with 2 choices.')
+        elif len(questions_and_choices) > 21:
+            return await ctx.send('You can only have up to 20 choices.')
+
+        perms = ctx.channel.permissions_for(ctx.me)
+        if not (perms.read_message_history or perms.add_reactions):
+            return await ctx.send('Need Read Message History and Add Reactions permissions.')
+
+        question = questions_and_choices[0]
+        choices = [(to_emoji(e), v) for e, v in enumerate(questions_and_choices[1:])]
+
+        try:
+            await ctx.message.delete()
+        except:
+            pass
+
+        body = "\n".join(f"{key}: {c}" for key, c in choices)
+        poll = await ctx.send(f'{ctx.author} asks: {question}\n\n{body}')
+        for emoji, _ in choices:
+            await poll.add_reaction(emoji)
 
 
 def setup(bot):
