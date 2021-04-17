@@ -9,7 +9,7 @@ class OwnerCog(commands.Cog):
     
     # hidden: the command won't show in the default help command
     # is_owner means only the bot owner (or a team which owns the bot) will be able to use this command
-    @commands.command(name='load', hidden=True)
+    @commands.command(hidden=True)
     @commands.is_owner()
     async def load(self, ctx, *, cog: str):
         """Command to load a module.
@@ -24,7 +24,7 @@ class OwnerCog(commands.Cog):
             await ctx.send('\N{OK HAND SIGN}')
 
 
-    @commands.command(name='unload', hidden=True)
+    @commands.command(hidden=True)
     @commands.is_owner()
     async def unload(self, ctx, *, cog: str):
         """Command to unload a module.
@@ -38,7 +38,7 @@ class OwnerCog(commands.Cog):
             await ctx.send('\N{OK HAND SIGN}')
     
 
-    @commands.command(name='reload', hidden=True)
+    @commands.command(hidden=True)
     @commands.is_owner()
     async def reload(self, ctx, *, cog: str):
         """Command to reload a module.
