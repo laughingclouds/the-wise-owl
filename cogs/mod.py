@@ -55,7 +55,7 @@ class Mod(commands.Cog):
     @commands.guild_only()
     async def member_joined_when(self, ctx):
         embed = discord.Embed(title="You joined at", colour=discord.Colour.red())
-        embed.add_field(name=f"{ctx.author}", value=f"{ctx.author.joined_at)}\nand created your ID: {ctx.author.created_at}")
+        embed.add_field(name=f"{ctx.author}", value=f"{ctx.author.joined_at}\nand created your ID: {ctx.author.created_at}")
         await ctx.send(embed=embed)
     
 
