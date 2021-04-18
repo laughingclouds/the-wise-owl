@@ -15,15 +15,6 @@ class Mod(commands.Cog):
         return '<cogs.Mod>'
 
     # Miscellanious
-    async def _basic_cleanup_strategy(self, ctx, search):
-        count = 0
-        async for msg in ctx.history(limit=search, before=ctx.message):
-            if msg.author == ctx.me:
-                await msg.delete()
-                count += 1
-        return {'Bot': count}
-    
-
     async def _complex_cleanup_strategy(self, ctx, search):
         prefixes = tuple(await self.bot.get_prefix(ctx.guild))
 
@@ -44,7 +35,7 @@ class Mod(commands.Cog):
         The count parameter can only be up to 25.
         """
 
-        count = max(min(count, 25), 5)
+        count = max(min(count, 25), 1)
 
         if not ctx.guild.chunked:
             await ctx.guild.chunk()
@@ -75,9 +66,7 @@ class Mod(commands.Cog):
         You must have Manage Messages permission to use this.
         """
 
-        strategy = self._basic_cleanup_strategy
-        if ctx.me.permissions_in(ctx.channel).manage_messages:
-            strategy = self._complex_cleanup_strategy
+        strategy = self._complex_cleanup_strategy
         
         spammers = await strategy(ctx, search)  # spammers is a dictionary
         deleted = sum(spammers.values())
