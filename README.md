@@ -1,3 +1,4 @@
+[color=#5a0fdb][size=150][center][b][quote]Welcome!!![/quote][/b][/center][/size][/color]
 # the-wise-owl
 A discord bot for goal setting purposes
 
