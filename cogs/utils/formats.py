@@ -1,3 +1,10 @@
+from .types.ct import datetimeType
+
+
+def beautify(timeobj: datetimeType) -> datetimeType:
+    return timeobj.replace(microsecond=0, tzinfo=None)
+
+
 class plural:
     def __init__(self, value):
         self.value = value

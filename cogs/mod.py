@@ -1,9 +1,10 @@
 import discord
-import datetime
+
 from .utils import checks
+from .utils.types import ct
+from .utils.formats import beautify
 from collections import Counter
 from discord.ext import commands
-from typing import Callable
 
 
 class Mod(commands.Cog):
@@ -45,8 +46,6 @@ class Mod(commands.Cog):
 
         embed = discord.Embed(title='New Members',
                               colour=discord.Color.green())
-        beautify: Callable[[datetime.datetime], datetime.datetime] = lambda timeobj: timeobj.replace(
-            microsecond=0, tzinfo=None)
         for member in members:
             body = f"Joined {beautify(member.joined_at)}\nCreated {beautify(member.created_at)}"
             embed.add_field(
@@ -58,17 +57,21 @@ class Mod(commands.Cog):
 
     @commands.command(name="joined_at")
     @commands.guild_only()
-    async def member_joined_when(self, ctx):
-        embed = discord.Embed(title="You joined at",
-                              colour=discord.Colour.red())
-        embed.add_field(
-            name=f"{ctx.author}", value=f"{ctx.author.joined_at}\nand created your ID: {ctx.author.created_at}")
+    async def member_joined_when(self, ctx: ct.ctxType, usr: ct.memberType=None):
+        """Tells you when a user joined. Gives the info of the user who invoked the command; by default"""
+
+        NAME, JOINED_AT, CREATED_AT = ctx.author, ctx.author.joined_at, ctx.author.created_at
+        if type(usr) in (ct.manyUsrType, ct.usrType, ct.memberType):
+            NAME, JOINED_AT, CREATED_AT = usr.name, usr.joined_at, usr.created_at
+            
+        embed = discord.Embed(title=f"{NAME} joined at", colour=discord.Colour.red())
+        embed.add_field(name=NAME, value=f"{beautify(JOINED_AT)}\nCreated ID at: {beautify(CREATED_AT)}")
         await ctx.send(embed=embed)
 
     @commands.command()
     @checks.has_permissions(manage_messages=True)
     async def cleanup(self, ctx, search=100):
-        """Cleans up the bot's messages from the channel.
+        """Cleans up the bots messages from the channel.
         If a search number is specified, it searches that many messages to delete.
         If the bot has Manage Messages permissions then it will try to delete
         messages that look like they invoked the bot as well.
@@ -95,6 +98,17 @@ class Mod(commands.Cog):
 
         await ctx.send('\n'.join(messages), delete_after=5)
         await ctx.channel.delete_messages([ctx.message])
+    
+    @commands.command()
+    @checks.has_permissions(manage_messages=True, read_message_history=True)
+    async def clear(self, ctx: ct.ctxType, amount: int=0):
+        """Clears the given number of messages."""
+        if amount == 0:
+            await ctx.send("Please enter the number of messages to delete.")
+            return
+        messages: list = await ctx.history(limit=amount).flatten()
+        await ctx.channel.delete_messages(messages)
+
 
 
 def setup(bot: commands.Bot):

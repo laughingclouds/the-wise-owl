@@ -8,14 +8,15 @@ TOKEN = environ['TOKEN']  # Get TOKEN
 intents = discord.Intents.all()
 intents.members = True
 # connection to discord (through the command section module)
-bot = commands.Bot(command_prefix='gg', intents=intents)
+bot = commands.Bot(command_prefix='hg', intents=intents)
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
 
 cog_extensions = (
     'cogs.owner',
     'cogs.interacting',
     'cogs.error_handler'
-)
+) # Going with the three most important and basic cogs
+# They define the skeleton/al of the bot
 
 for extension in cog_extensions:
     bot.load_extension(extension)
