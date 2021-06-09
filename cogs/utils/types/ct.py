@@ -4,13 +4,15 @@ from datetime import datetime
 import discord
 from discord.abc import Messageable
 from discord.channel import DMChannel, GroupChannel, TextChannel
-from discord.ext.commands import Context
+from discord.ext import commands
 from typing import Union
 
 
+ctxType = commands.Context
 datetimeType = datetime
-ctxType = Context
 messageableType = Union[Messageable]
-usrType = discord.User
 memberType = discord.Member
+usrType = discord.User
+
 manyUsrType = Union[memberType, usrType]
+botType = commands.Bot
