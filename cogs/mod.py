@@ -51,6 +51,14 @@ class Mod(commands.Cog):
         await ctx.send(embed=embed)
     
 
+    @commands.command(name="joined_at")
+    @commands.guild_only()
+    async def member_joined_when(self, ctx):
+        embed = discord.Embed(title="You joined at", colour=discord.Colour.red())
+        embed.add_field(name=f"{ctx.author}", value=f"{ctx.author.joined_at}\nand created your ID: {ctx.author.created_at}")
+        await ctx.send(embed=embed)
+    
+
     @commands.command()
     @checks.has_permissions(manage_messages=True)
     async def cleanup(self, ctx, search=100):

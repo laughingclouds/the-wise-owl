@@ -1,8 +1,4 @@
 # *non-Project* user-defined files
-del.py
-del.csv
-README.rst
-reference
 .vscode
 
 # Byte-compiled / optimized / DLL files

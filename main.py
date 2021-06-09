@@ -10,8 +10,6 @@ bot = commands.Bot(command_prefix='hg', intents=intents)  # connection to discor
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
 
 cog_extensions = (
-    'cogs.mod',
-    'cogs.poll',
     'cogs.owner',
 	'cogs.interacting',
 	'cogs.error_handler'
