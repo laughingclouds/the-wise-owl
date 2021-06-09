@@ -27,7 +27,12 @@ class Misc(commands.Cog):
     @commands.command()
     async def do_search(self, ctx: ct.ctxType, *, searchStr: str):
         """A command that does a google search for you."""
-        pass
+
+        embed = discord.Embed(title='Search Results', type='link', colour=discord.Color.dark_blue())
+        
+        for j in search(searchStr, tld='com', num=5, stop=5, pause=2):
+            embed.add_field(name='Link', value=j, inline=False)
+        await ctx.send(embed=embed)
 
 
 
