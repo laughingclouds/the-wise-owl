@@ -24,9 +24,9 @@ class Misc(commands.Cog):
             name='End', value="We\'ll come back with more features soon", inline=False)
         await ctx.send(embed=embed)
     
-    @commands.command()
+    @commands.command(name='search')
     async def do_search(self, ctx: ct.ctxType, *, searchStr: str):
-        """A command that does a google search for you."""
+        """A command that does a google search for you and returns the top 5 search results."""
 
         embed = discord.Embed(title='Search Results', type='link', colour=discord.Color.dark_blue())
         
