@@ -1,12 +1,13 @@
 import discord
 from discord.ext import commands
-
+from .utils.types import ct
+from googlesearch import search
 
 class Misc(commands.Cog):
     """For testing new bot commands without actually re-running the bot"""
 
     def __init__(self, bot):
-        self.bot: commands.Bot = bot
+        self.bot: ct.botType = bot
 
     @commands.command()
     async def all(self, ctx):
@@ -22,6 +23,12 @@ class Misc(commands.Cog):
         embed.add_field(
             name='End', value="We\'ll come back with more features soon", inline=False)
         await ctx.send(embed=embed)
+    
+    @commands.command()
+    async def do_search(self, ctx: ct.ctxType, *, searchStr: str):
+        """A command that does a google search for you."""
+        pass
+
 
 
 def setup(bot: commands.Bot):

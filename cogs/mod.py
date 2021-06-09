@@ -11,7 +11,7 @@ class Mod(commands.Cog):
 
     # Special methods
     def __init__(self, bot):
-        self.bot: commands.Bot = bot
+        self.bot: ct.botType = bot
 
     def __repr__(self):
         return '<cogs.Mod>'
@@ -63,7 +63,7 @@ class Mod(commands.Cog):
         NAME, JOINED_AT, CREATED_AT = ctx.author, ctx.author.joined_at, ctx.author.created_at
         if type(usr) in (ct.manyUsrType, ct.usrType, ct.memberType):
             NAME, JOINED_AT, CREATED_AT = usr.name, usr.joined_at, usr.created_at
-            
+
         embed = discord.Embed(title=f"{NAME} joined at", colour=discord.Colour.red())
         embed.add_field(name=NAME, value=f"{beautify(JOINED_AT)}\nCreated ID at: {beautify(CREATED_AT)}")
         await ctx.send(embed=embed)
