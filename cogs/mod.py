@@ -1,15 +1,16 @@
 import discord
-import asyncio
-from .utils import time, checks
+import datetime
+from .utils import checks
 from collections import Counter
 from discord.ext import commands
+from typing import Callable
 
 
 class Mod(commands.Cog):
 
     # Special methods
     def __init__(self, bot):
-        self.bot = bot
+        self.bot: commands.Bot = bot
     
     def __repr__(self):
         return '<cogs.Mod>'
@@ -40,15 +41,17 @@ class Mod(commands.Cog):
         if not ctx.guild.chunked:
             await ctx.guild.chunk()
         
-        members = sorted(ctx.guild.members, key=lambda m: m.joined_at, reverse=True)[: count]
+        members: list[discord.Member] = sorted(ctx.guild.members, key=lambda m: m.joined_at, reverse=True)[: count]
 
         embed = discord.Embed(title='New Members', colour=discord.Color.green())
-
+        beautify: Callable[[datetime.datetime], datetime.datetime] = lambda timeobj: timeobj.replace(microsecond=0, tzinfo=None)
         for member in members:
-            body = f"Joined {time.human_timedelta(member.joined_at)}\nCreated {time.human_timedelta(member.created_at)}"
+            body = f"Joined {beautify(member.joined_at)}\nCreated {beautify(member.created_at)}"
             embed.add_field(name=f'{member} (ID: {member.id})', value=body, inline=False)
         
         await ctx.send(embed=embed)
+        msg = [ctx.message]
+        await ctx.channel.delete_messages(msg)
     
 
     @commands.command(name="joined_at")
@@ -86,7 +89,8 @@ class Mod(commands.Cog):
             messages.extend(f"- **{author}:** {count}" for author, count in spammers)
         
         await ctx.send('\n'.join(messages), delete_after=5)
+        await ctx.channel.delete_messages([ctx.message])
 
 
-def setup(bot):
+def setup(bot: commands.Bot):
     bot.add_cog(Mod(bot))

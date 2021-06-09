@@ -5,7 +5,7 @@ class OwnerCog(commands.Cog):
     """Commands that can be run by an owner only"""
 
     def __init__(self, bot):
-        self.bot = bot
+        self.bot: commands.Bot = bot
     
     # hidden: the command won't show in the default help command
     # is_owner means only the bot owner (or a team which owns the bot) will be able to use this command
@@ -52,5 +52,5 @@ class OwnerCog(commands.Cog):
             await ctx.send('\N{OK HAND SIGN}')
 
 
-def setup(bot):
+def setup(bot: commands.Bot):
     bot.add_cog(OwnerCog(bot))

@@ -9,7 +9,7 @@ class Polls(commands.Cog):
     """Poll voting system."""
 
     def __init__(self, bot):
-        self.bot = bot
+        self.bot: commands.Bot = bot
 
     @commands.command()
     @commands.guild_only()
@@ -87,5 +87,5 @@ class Polls(commands.Cog):
             await poll.add_reaction(emoji)
 
 
-def setup(bot):
+def setup(bot: commands.Bot):
     bot.add_cog(Polls(bot))

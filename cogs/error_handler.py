@@ -8,7 +8,7 @@ class CommandErrorHandler(commands.Cog):
     """An error handler for discord commands"""
 
     def __init__(self, bot):
-        self.bot = bot
+        self.bot: commands.Bot = bot
     
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -72,5 +72,5 @@ class CommandErrorHandler(commands.Cog):
 
         
 
-def setup(bot):
+def setup(bot: commands.Bot):
     bot.add_cog(CommandErrorHandler(bot))

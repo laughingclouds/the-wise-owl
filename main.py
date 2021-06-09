@@ -1,12 +1,12 @@
-import os
+from os import environ
 import discord
 from discord.ext import commands  # for using commands.Bot() instead of discord.Client()
 
 
-TOKEN = os.environ['TOKEN']	# Get TOKEN
+TOKEN = environ['TOKEN']	# Get TOKEN
 intents = discord.Intents.all()
 intents.members = True
-bot = commands.Bot(command_prefix='hg', intents=intents)  # connection to discord (through the command section module)
+bot = commands.Bot(command_prefix='gg', intents=intents)  # connection to discord (through the command section module)
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
 
 cog_extensions = (

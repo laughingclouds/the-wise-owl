@@ -3,7 +3,7 @@ from discord.ext import commands
 
 class Interactions(commands.Cog):
     def __init__(self, bot):
-        self.bot = bot
+        self.bot: commands.Bot = bot
         self.on_member_join_msg = "G'day! If you leave I'll kill you"
         self.on_member_remove_msg = "And there they go. It\'s all fun and games until Blaze bans you."
     
@@ -58,5 +58,5 @@ class Interactions(commands.Cog):
         await ctx.send(f"Hello {ctx.author.display_name}")
 
 
-def setup(bot):
+def setup(bot: commands.Bot):
     bot.add_cog(Interactions(bot))
