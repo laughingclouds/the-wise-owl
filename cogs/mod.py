@@ -11,7 +11,7 @@ class Mod(commands.Cog):
     # Special methods
     def __init__(self, bot):
         self.bot: commands.Bot = bot
-    
+
     def __repr__(self):
         return '<cogs.Mod>'
 
@@ -21,10 +21,9 @@ class Mod(commands.Cog):
 
         def check(m):
             return m.author == ctx.me or m.content.startswith(prefixes)
-        
+
         deleted = await ctx.channel.purge(limit=search, check=check, before=ctx.message)
         return Counter(m.author.display_name for m in deleted)
-
 
     @commands.command(aliases=['newmembers'])
     @commands.guild_only()
@@ -40,27 +39,31 @@ class Mod(commands.Cog):
 
         if not ctx.guild.chunked:
             await ctx.guild.chunk()
-        
-        members: list[discord.Member] = sorted(ctx.guild.members, key=lambda m: m.joined_at, reverse=True)[: count]
 
-        embed = discord.Embed(title='New Members', colour=discord.Color.green())
-        beautify: Callable[[datetime.datetime], datetime.datetime] = lambda timeobj: timeobj.replace(microsecond=0, tzinfo=None)
+        members: list[discord.Member] = sorted(
+            ctx.guild.members, key=lambda m: m.joined_at, reverse=True)[: count]
+
+        embed = discord.Embed(title='New Members',
+                              colour=discord.Color.green())
+        beautify: Callable[[datetime.datetime], datetime.datetime] = lambda timeobj: timeobj.replace(
+            microsecond=0, tzinfo=None)
         for member in members:
             body = f"Joined {beautify(member.joined_at)}\nCreated {beautify(member.created_at)}"
-            embed.add_field(name=f'{member} (ID: {member.id})', value=body, inline=False)
-        
+            embed.add_field(
+                name=f'{member} (ID: {member.id})', value=body, inline=False)
+
         await ctx.send(embed=embed)
         msg = [ctx.message]
         await ctx.channel.delete_messages(msg)
-    
 
     @commands.command(name="joined_at")
     @commands.guild_only()
     async def member_joined_when(self, ctx):
-        embed = discord.Embed(title="You joined at", colour=discord.Colour.red())
-        embed.add_field(name=f"{ctx.author}", value=f"{ctx.author.joined_at}\nand created your ID: {ctx.author.created_at}")
+        embed = discord.Embed(title="You joined at",
+                              colour=discord.Colour.red())
+        embed.add_field(
+            name=f"{ctx.author}", value=f"{ctx.author.joined_at}\nand created your ID: {ctx.author.created_at}")
         await ctx.send(embed=embed)
-    
 
     @commands.command()
     @checks.has_permissions(manage_messages=True)
@@ -78,16 +81,18 @@ class Mod(commands.Cog):
         """
 
         strategy = self._complex_cleanup_strategy
-        
+
         spammers = await strategy(ctx, search)  # spammers is a dictionary
         deleted = sum(spammers.values())
         add_str = " was" if deleted == 1 else "s were"
         messages = [f"{deleted} message{add_str} removed."]
         if deleted:
             messages.append('')
-            spammers = sorted(spammers.items(), key=lambda t: t[1], reverse=True)
-            messages.extend(f"- **{author}:** {count}" for author, count in spammers)
-        
+            spammers = sorted(spammers.items(),
+                              key=lambda t: t[1], reverse=True)
+            messages.extend(
+                f"- **{author}:** {count}" for author, count in spammers)
+
         await ctx.send('\n'.join(messages), delete_after=5)
         await ctx.channel.delete_messages([ctx.message])
 

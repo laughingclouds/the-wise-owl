@@ -8,6 +8,7 @@ from discord.ext import commands
 # admin (Administrator). Having these signify certain bypasses.
 # Of course, the owner will always be able to execute commands.
 
+
 async def check_permissions(ctx, perms, *, check=all):
     is_owner = await ctx.bot.is_owner(ctx.author)
     if is_owner:
@@ -30,7 +31,7 @@ async def check_guild_permissions(ctx, perms, *, check=all):
 
     if ctx.guild is None:
         return False
-    
+
     resolved = ctx.author.guild_permissions
     return check(getattr(resolved, name, None) == value for name, value in perms.items())
 
@@ -41,6 +42,7 @@ def has_guild_permissions(*, check=all, **perms):
     return commands.check(pred)
 
 # These do not take channel overrides into account
+
 
 def is_mod():
     async def pred(ctx):
@@ -56,6 +58,7 @@ def is_mod():
 
 def mod_or_permissions(**perms):
     perms['manage_guild'] = True
+
     async def predicate(ctx):
         return await check_guild_permissions(ctx, perms, check=any)
     return commands.check(predicate)
@@ -63,6 +66,7 @@ def mod_or_permissions(**perms):
 
 def admin_or_permissions(**perms):
     perms['administrator'] = True
+
     async def predicate(ctx):
         return await check_guild_permissions(ctx, perms, check=any)
     return commands.check(predicate)

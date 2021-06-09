@@ -6,7 +6,7 @@ class OwnerCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot: commands.Bot = bot
-    
+
     # hidden: the command won't show in the default help command
     # is_owner means only the bot owner (or a team which owns the bot) will be able to use this command
     @commands.command(hidden=True)
@@ -23,7 +23,6 @@ class OwnerCog(commands.Cog):
         else:
             await ctx.send('\N{OK HAND SIGN}')
 
-
     @commands.command(hidden=True)
     @commands.is_owner()
     async def unload(self, ctx, *, cog: str):
@@ -36,7 +35,6 @@ class OwnerCog(commands.Cog):
             await ctx.send(f"**`ERROR:`** {type(e).__name__} - {e}")
         else:
             await ctx.send('\N{OK HAND SIGN}')
-    
 
     @commands.command(hidden=True)
     @commands.is_owner()
