@@ -8,7 +8,7 @@ TOKEN = environ['TOKEN']  # Get TOKEN
 intents = discord.Intents.all()
 intents.members = True
 # connection to discord (through the command section module)
-bot = commands.Bot(command_prefix='hg', intents=intents)
+bot = commands.Bot(command_prefix='gg', intents=intents)
 #  Note: class discord.ext.commands.Bot() is a subclass of discord.client
 
 cog_extensions = (
