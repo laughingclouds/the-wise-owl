@@ -12,6 +12,7 @@ ctxType = commands.Context
 datetimeType = datetime
 messageableType = Union[Messageable]
 memberType = discord.Member
+msgType = discord.Message
 usrType = discord.User
 
 manyUsrType = Union[memberType, usrType]
