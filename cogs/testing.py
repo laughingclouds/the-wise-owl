@@ -44,8 +44,8 @@ class Misc(commands.Cog):
         embed.set_image(url=avatar_link)
         await ctx.reply(embed=embed)
     
-    @commands.command(name='snipe')
-    async def snipe(self, ctx: ct.ctxType):
+    @commands.command(name='snipe_copy')
+    async def do_snipe(self, ctx: ct.ctxType):
         msgs_iterable = await ctx.history().flatten()
         msgs: list[discord.Message] = []
         
