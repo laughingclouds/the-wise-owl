@@ -33,8 +33,26 @@ class Misc(commands.Cog):
         for j in search(searchStr, tld='com', num=5, stop=5, pause=2):
             embed.add_field(name='Link', value=j, inline=False)
         await ctx.send(embed=embed)
+    
+    @commands.command(aliases=['av', 'avatar'])
+    async def send_avatar(self, ctx: ct.ctxType, usr: ct.memberType=None):
+        avatar_link = ctx.author.avatar.url
+        if type(usr) in (ct.manyUsrType, ct.usrType, ct.memberType):
+            avatar_link = usr.avatar.url
 
+        embed = discord.Embed(color=discord.Colour.red())
+        embed.set_image(url=avatar_link)
+        await ctx.reply(embed=embed)
+    
+    @commands.command(name='snipe')
+    async def snipe(self, ctx: ct.ctxType):
+        msgs_iterable = await ctx.history().flatten()
+        msgs: list[discord.Message] = []
+        
+        for msg in msgs_iterable:
+            msgs.append(msg)
+        # Create an event that stores the channel id and the last deleted
+        # msg in that channel.
 
-
-def setup(bot: commands.Bot):
+def setup(bot: ct.botType):
     bot.add_cog(Misc(bot))
