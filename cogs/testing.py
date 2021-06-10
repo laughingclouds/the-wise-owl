@@ -36,6 +36,7 @@ class Misc(commands.Cog):
     
     @commands.command(name='av', aliases=['avatar'])
     async def send_avatar(self, ctx: ct.ctxType, usr: ct.memberType=None):
+        """Returns an image embed with the avatar of the command issuer by default. If a username is given or a user is mentioned, it will return that users avatar."""
         avatar_link = ctx.author.avatar.url
         if type(usr) in (ct.manyUsrType, ct.usrType, ct.memberType):
             avatar_link = usr.avatar.url
