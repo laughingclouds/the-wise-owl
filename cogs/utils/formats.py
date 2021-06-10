@@ -2,6 +2,7 @@ from .types.ct import datetimeType
 
 
 def beautify(timeobj: datetimeType) -> datetimeType:
+    """Removes `microsecond` and `tzinfo` from a datetime object"""
     return timeobj.replace(microsecond=0, tzinfo=None)
 
 
