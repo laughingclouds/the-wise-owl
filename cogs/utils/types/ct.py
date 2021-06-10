@@ -9,11 +9,13 @@ from typing import Union
 
 
 ctxType = commands.Context
+clientUsrType = discord.ClientUser
 datetimeType = datetime
 messageableType = Union[Messageable]
 memberType = discord.Member
 msgType = discord.Message
 usrType = discord.User
 
-manyUsrType = Union[memberType, usrType]
 botType = commands.Bot
+manyUsrType = Union[memberType, usrType]
+authorType = Union[memberType, clientUsrType]
