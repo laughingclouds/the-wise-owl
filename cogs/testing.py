@@ -55,6 +55,27 @@ class Misc(commands.Cog):
             msgs.append(msg)
         # Create an event that stores the channel id and the last deleted
         # msg in that channel.
+    
+    @commands.command(name='embed')
+    async def sample_embed(self, ctx: ct.ctxType):
+        """Just a random command that shows you how complex embeds can be."""
+        embed = discord.Embed(
+            title='Sample Embed',
+            url='https://youtu.be/dQw4w9WgXcQ',
+            description='This is a sample embed.',
+            colour=discord.Colour.dark_blue()
+        )
+        embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar.url)
+
+        embed.set_thumbnail(url=ctx.author.avatar.url)
+
+        embed.add_field(name='Field1', value='Value under Field1, inline=False', inline=False)
+        embed.add_field(name='Field2', value='Value under Field2, inline=True', inline=True)
+        embed.add_field(name='Field3', value='Value under Field3, inline=True', inline=True)
+
+        embed.set_footer(text=f'Requested by {ctx.author.name}', icon_url=ctx.author.avatar.url)
+
+        await ctx.reply(embed=embed)
 
 def setup(bot: ct.botType):
     bot.add_cog(Misc(bot))
