@@ -34,7 +34,7 @@ class Misc(commands.Cog):
             embed.add_field(name='Link', value=j, inline=False)
         await ctx.send(embed=embed)
     
-    @commands.command(aliases=['av', 'avatar'])
+    @commands.command(name='av', aliases=['avatar'])
     async def send_avatar(self, ctx: ct.ctxType, usr: ct.memberType=None):
         avatar_link = ctx.author.avatar.url
         if type(usr) in (ct.manyUsrType, ct.usrType, ct.memberType):
@@ -42,6 +42,7 @@ class Misc(commands.Cog):
 
         embed = discord.Embed(color=discord.Colour.red())
         embed.set_image(url=avatar_link)
+        embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar.url)
         await ctx.reply(embed=embed)
     
     @commands.command(name='snipe')
