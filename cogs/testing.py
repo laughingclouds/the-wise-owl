@@ -45,8 +45,8 @@ class Misc(commands.Cog):
         embed.set_footer(text=f"Requested by {ctx.author.name}", icon_url=ctx.author.avatar.url)
         await ctx.reply(embed=embed)
     
-    @commands.command(name='snipe')
-    async def snipe(self, ctx: ct.ctxType):
+    @commands.command(name='snipe_copy')
+    async def do_snipe(self, ctx: ct.ctxType):
         msgs_iterable = await ctx.history().flatten()
         msgs: list[discord.Message] = []
         
