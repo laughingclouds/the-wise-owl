@@ -14,7 +14,7 @@ class Mod(commands.Cog):
         self.bot: ct.botType = bot
 
     def __repr__(self):
-        return '<cogs.Mod>'
+        return "<cogs.Mod>"
 
     # Miscellanious
     async def _complex_cleanup_strategy(self, ctx, search):
@@ -26,7 +26,7 @@ class Mod(commands.Cog):
         deleted = await ctx.channel.purge(limit=search, check=check, before=ctx.message)
         return Counter(m.author.display_name for m in deleted)
 
-    @commands.command(aliases=['newmembers'])
+    @commands.command(aliases=["newmembers"])
     @commands.guild_only()
     async def newusers(self, ctx, *, count=5):
         """Tells you the newest members of the server.
@@ -42,14 +42,15 @@ class Mod(commands.Cog):
             await ctx.guild.chunk()
 
         members: list[discord.Member] = sorted(
-            ctx.guild.members, key=lambda m: m.joined_at, reverse=True)[: count]
+            ctx.guild.members, key=lambda m: m.joined_at, reverse=True
+        )[:count]
 
-        embed = discord.Embed(title='New Members',
-                              colour=discord.Color.green())
+        embed = discord.Embed(title="New Members", colour=discord.Color.green())
         for member in members:
             body = f"Joined {beautify(member.joined_at)}\nCreated {beautify(member.created_at)}"
             embed.add_field(
-                name=f'{member} (ID: {member.id})', value=body, inline=False)
+                name=f"{member} (ID: {member.id})", value=body, inline=False
+            )
 
         await ctx.send(embed=embed)
         msg = [ctx.message]
@@ -57,15 +58,22 @@ class Mod(commands.Cog):
 
     @commands.command(name="joined_at")
     @commands.guild_only()
-    async def member_joined_when(self, ctx: ct.ctxType, usr: ct.memberType=None):
+    async def member_joined_when(self, ctx: ct.ctxType, usr: ct.memberType = None):
         """Tells you when a user joined. Gives the info of the user who invoked the command; by default"""
 
-        NAME, JOINED_AT, CREATED_AT = ctx.author, ctx.author.joined_at, ctx.author.created_at
+        NAME, JOINED_AT, CREATED_AT = (
+            ctx.author,
+            ctx.author.joined_at,
+            ctx.author.created_at,
+        )
         if type(usr) in (ct.manyUsrType, ct.usrType, ct.memberType):
             NAME, JOINED_AT, CREATED_AT = usr.name, usr.joined_at, usr.created_at
 
         embed = discord.Embed(title=f"{NAME} joined at", colour=discord.Colour.red())
-        embed.add_field(name=NAME, value=f"{beautify(JOINED_AT)}\nCreated ID at: {beautify(CREATED_AT)}")
+        embed.add_field(
+            name=NAME,
+            value=f"{beautify(JOINED_AT)}\nCreated ID at: {beautify(CREATED_AT)}",
+        )
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -90,25 +98,22 @@ class Mod(commands.Cog):
         add_str = " was" if deleted == 1 else "s were"
         messages = [f"{deleted} message{add_str} removed."]
         if deleted:
-            messages.append('')
-            spammers = sorted(spammers.items(),
-                              key=lambda t: t[1], reverse=True)
-            messages.extend(
-                f"- **{author}:** {count}" for author, count in spammers)
+            messages.append("")
+            spammers = sorted(spammers.items(), key=lambda t: t[1], reverse=True)
+            messages.extend(f"- **{author}:** {count}" for author, count in spammers)
 
-        await ctx.send('\n'.join(messages), delete_after=5)
+        await ctx.send("\n".join(messages), delete_after=5)
         await ctx.channel.delete_messages([ctx.message])
-    
+
     @commands.command()
     @checks.has_permissions(manage_messages=True, read_message_history=True)
-    async def clear(self, ctx: ct.ctxType, amount: int=0):
+    async def clear(self, ctx: ct.ctxType, amount: int = 0):
         """Clears the given number of messages."""
         if amount == 0:
             await ctx.send("Please enter the number of messages to delete.")
             return
         messages: list = await ctx.history(limit=amount).flatten()
         await ctx.channel.delete_messages(messages)
-
 
 
 def setup(bot: commands.Bot):

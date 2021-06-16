@@ -20,14 +20,20 @@ class CommandErrorHandler(commands.Cog):
         """
 
         # This prevents any commands with local handlers being handled here in on_command_error.
-        if hasattr(ctx.command, 'on_error'):
+        if hasattr(ctx.command, "on_error"):
 
             embed = discord.Embed(colour=discord.Colour.purple())
-            embed.set_author(name='Error lol')
+            embed.set_author(name="Error lol")
             embed.add_field(
-                name='\'on_error\'', value='https://discordpy.readthedocs.io/en/latest/api.html#discord.on_error', inline=False)
+                name="'on_error'",
+                value="https://discordpy.readthedocs.io/en/latest/api.html#discord.on_error",
+                inline=False,
+            )
             embed.add_field(
-                name='', value='This is an error for the local handlers to deal with...hopefully not me.', inline=False)
+                name="",
+                value="This is an error for the local handlers to deal with...hopefully not me.",
+                inline=False,
+            )
             await ctx.send(embed=embed)
             return
 
@@ -37,11 +43,11 @@ class CommandErrorHandler(commands.Cog):
         #     if cog._get_overridden_method(cog.command.error) is not None:
         #         return
 
-        ignored = (commands.CommandNotFound, )
+        ignored = (commands.CommandNotFound,)
 
         # Allows us to check for original exceptions raised and sent to CommandInvokeError.
         # If nothing is found. We keep the exception passed to on_command_error
-        error = getattr(error, 'original', error)
+        error = getattr(error, "original", error)
 
         # Anything in ignored will return and prevent anything happening
         if isinstance(error, ignored):
@@ -52,7 +58,7 @@ class CommandErrorHandler(commands.Cog):
 
         elif isinstance(error, commands.NoPrivateMessage):
             try:
-                await ctx.author.send(f"{ctx.command} can\'t be used in the DMs.")
+                await ctx.author.send(f"{ctx.command} can't be used in the DMs.")
             except discord.HTTPException:
                 pass
 
@@ -61,14 +67,18 @@ class CommandErrorHandler(commands.Cog):
         elif isinstance(error, commands.BadArgument):
             # Check if the command being invoked is 'tag list'
             if ctx.command.qualified_name in ("poll", "quickpoll"):
-                await ctx.send('Hey kiddo, how dumb do you need to be to enter the arguements wrong?')
+                await ctx.send(
+                    "Hey kiddo, how dumb do you need to be to enter the arguements wrong?"
+                )
 
         else:
             # All other errors not returned come here. And we can just print the default Traceback.
             try:
                 await ctx.send(f"**`ERROR:`** {type(error).__name__} - {error}")
             except:
-                await ctx.send("Error lol, could u pls contact my developer at \nhttps://discord.gg/Gu4mVGhwWJ  ?")
+                await ctx.send(
+                    "Error lol, could u pls contact my developer at \nhttps://discord.gg/Gu4mVGhwWJ  ?"
+                )
 
 
 def setup(bot: commands.Bot):

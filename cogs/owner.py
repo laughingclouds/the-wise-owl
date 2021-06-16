@@ -21,7 +21,7 @@ class OwnerCog(commands.Cog):
         except Exception as e:
             await ctx.send(f"**`ERORR:`** {type(e).__name__} - {e}")
         else:
-            await ctx.send('\N{OK HAND SIGN}')
+            await ctx.send("\N{OK HAND SIGN}")
 
     @commands.command(hidden=True)
     @commands.is_owner()
@@ -34,7 +34,7 @@ class OwnerCog(commands.Cog):
         except Exception as e:
             await ctx.send(f"**`ERROR:`** {type(e).__name__} - {e}")
         else:
-            await ctx.send('\N{OK HAND SIGN}')
+            await ctx.send("\N{OK HAND SIGN}")
 
     @commands.command(hidden=True)
     @commands.is_owner()
@@ -47,7 +47,7 @@ class OwnerCog(commands.Cog):
         except Exception as e:
             await ctx.send(f"**`ERROR:`** {type(e).__name__} - {e}")
         else:
-            await ctx.send('\N{OK HAND SIGN}')
+            await ctx.send("\N{OK HAND SIGN}")
 
 
 def setup(bot: commands.Bot):

@@ -11,9 +11,10 @@ class Interactions(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
         self.on_member_join_msg = "G'day! If you leave I'll kill you"
-        self.on_member_remove_msg = "And there they go. It\'s all fun and games until Blaze bans you."
+        self.on_member_remove_msg = (
+            "And there they go. It's all fun and games until Blaze bans you."
+        )
         self.deleted_msg_dict: dict[int, tuple[ct.msgType, ct.datetimeType]] = {}
-
 
     @commands.Cog.listener()
     async def on_message_delete(self, msg: ct.msgType):
@@ -41,7 +42,7 @@ class Interactions(commands.Cog):
         else:
             pass  # send msg to admins to create a sys chan
 
-    @commands.command(name="say", aliases=['mimic', 'repeat', 'copy'])
+    @commands.command(name="say", aliases=["mimic", "repeat", "copy"])
     async def do_repeat(self, ctx: ct.ctxType, *, inp: str):
         """A simple command that repeats your input
 
@@ -65,30 +66,29 @@ class Interactions(commands.Cog):
 
         # Check if our required argument inp is missing.
         if isinstance(error, commands.MissingRequiredArgument):
-            if error.param.name == 'inp':
+            if error.param.name == "inp":
                 await ctx.send(f"You forgot to give the input.")
 
-    @commands.command(name="hello", aliases=['hi', 'howdy'])
+    @commands.command(name="hello", aliases=["hi", "howdy"])
     async def hello(self, ctx: ct.ctxType):
         """Command to send yourself a hello...it\'s quite obv y\'know!"""
         await ctx.send(f"Hello {ctx.author.display_name}")
 
-    @commands.command(name='snipe')
+    @commands.command(name="snipe")
     async def snipe(self, ctx: ct.ctxType):
         """Returns the `UTC` time of when a message is deleted."""
         channel = ctx.channel.id
         if channel not in self.deleted_msg_dict:
             await ctx.send("There's nothing to snipe!")
             return
-        
+
         msg, delete_time = self.deleted_msg_dict[channel]
         author, icon_url = msg.author, msg.author.avatar.url
-        embed = discord.Embed(type='rich', colour=discord.Colour.dark_purple())
+        embed = discord.Embed(type="rich", colour=discord.Colour.dark_purple())
         embed.set_author(name=author, icon_url=icon_url)
-        embed.add_field(name='Message sniped', value=msg.content)
+        embed.add_field(name="Message sniped", value=msg.content)
         embed.set_footer(text=f"Deleted at {delete_time}")
         await ctx.send(embed=embed)
-
 
 
 def setup(bot: commands.Bot):
